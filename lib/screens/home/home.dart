@@ -16,10 +16,10 @@ class Home extends StatelessWidget {
     return StreamProvider<QuerySnapshot>.value(
       value: DatabaseService().geecs,
       child: Scaffold(
-        backgroundColor: Colors.brown[50],
+        backgroundColor: Colors.yellow[50],
         appBar: AppBar(
-          title: Text('Brew Crew'),
-          backgroundColor: Colors.brown[400],
+          title: Text('GEEC'),
+          backgroundColor: Colors.yellow[400],
           elevation: 0.0,
           actions: <Widget>[
             FlatButton.icon(

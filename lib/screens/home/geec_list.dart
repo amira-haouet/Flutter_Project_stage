@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-class BrewList extends StatefulWidget {
+class GeecList extends StatefulWidget {
   @override
   _GeecListState createState() => _GeecListState();
 }
