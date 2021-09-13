@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lastapp2308/shared/loading.dart';
 
@@ -7,13 +6,15 @@ class Test extends StatelessWidget {
   @override
   bool loading = false;
   Widget build(BuildContext context) {
-    return loading
-        ? Loading()
-        : Scaffold(
-            body: MyApp(),
-          );
+    return loading ? Loading() : Scaffold(
+    
+        body: MyApp(),
+        
+      
+    );
   }
 }
+
 
 class MyApp extends StatefulWidget {
   @override
@@ -21,79 +22,77 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String nomProduit, CracterstiqueProd;
-  double ProduitPrice;
-  int idProd;
+  String studentName, studentID, studyProgramID;
+  double studentGPA;
 
-  getnomProduit(name) {
-    this.nomProduit = name;
+  getStudentName(name) {
+    this.studentName = name;
   }
 
-  getidProd(id) {
-    this.idProd = int.parse(id);
+  getStudentID(id) {
+    this.studentID = id;
   }
 
-  getCracterstiqueProd(CractID) {
-    this.CracterstiqueProd = CractID;
+  getStudyProgramID(programID) {
+    this.studyProgramID = programID;
   }
 
-  getProduitPrice(price) {
-    this.ProduitPrice = double.parse(price);
+  getStudentGPA(gpa) {
+    this.studentGPA = double.parse(gpa);
   }
 
   createData() {
     DocumentReference documentReference =
-        Firestore.instance.collection("Produits").document(nomProduit);
+        Firestore.instance.collection("MyStudents").document(studentName);
 
     // create Map
-    Map<String, dynamic> Produits = {
-      "nomProduit": nomProduit,
-      "idProd": idProd,
-      "CracterstiqueProd": CracterstiqueProd,
-      "ProduitPrice": ProduitPrice
+    Map<String, dynamic> students = {
+      "studentName": studentName,
+      "studentID": studentID,
+      "studyProgramID": studyProgramID,
+      "studentGPA": studentGPA
     };
 
-    documentReference.setData(Produits).whenComplete(() {
-      print("$nomProduit created");
+    documentReference.setData(students).whenComplete(() {
+      print("$studentName created");
     });
   }
 
   readData() {
     DocumentReference documentReference =
-        Firestore.instance.collection("Produits").document(nomProduit);
+        Firestore.instance.collection("MyStudents").document(studentName);
 
     documentReference.get().then((datasnapshot) {
-      print(datasnapshot.data["nomProduit"]);
-      print(datasnapshot.data["idProd"]);
-      print(datasnapshot.data["CracterstiqueProd"]);
-      print(datasnapshot.data["ProduitPrice"]);
+      print(datasnapshot.data["studentName"]);
+      print(datasnapshot.data["studentID"]);
+      print(datasnapshot.data["studyProgramID"]);
+      print(datasnapshot.data["studentGPA"]);
     });
-    
   }
 
   updateData() {
     DocumentReference documentReference =
-        Firestore.instance.collection("Produits").document(nomProduit);
+        Firestore.instance.collection("MyStudents").document(studentName);
 
     // create Map
-    Map<String, dynamic> Produits = {
-      "nomProduit": nomProduit,
-      "idProd": idProd,
-      "CracterstiqueProd": CracterstiqueProd,
-      "ProduitPrice": ProduitPrice
+    Map<String, dynamic> students = {
+      "studentName": studentName,
+      "studentID": studentID,
+      "studyProgramID": studyProgramID,
+      "studentGPA": studentGPA
     };
 
-    documentReference.setData(Produits).whenComplete(() {
-      print("$nomProduit updated");
+    documentReference.setData(students).whenComplete(() {
+      print("$studentName updated");
     });
   }
 
   deleteData() {
     DocumentReference documentReference =
-        Firestore.instance.collection("Produits").document(nomProduit);
+        Firestore.instance.collection("MyStudents").document(studentName);
 
     documentReference.delete().whenComplete(() {
-      print("$nomProduit deleted");
+      print("$studentName deleted");
     });
   }
 
@@ -101,8 +100,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.yellow[600],
-        title: Text("Materials"),
+        title: Text("My Flutter College"),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -116,9 +114,9 @@ class _MyAppState extends State<MyApp> {
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0))),
+                            BorderSide(color: Colors.blue, width: 2.0))),
                 onChanged: (String name) {
-                  getnomProduit(name);
+                  getStudentName(name);
                 },
               ),
             ),
@@ -126,13 +124,13 @@ class _MyAppState extends State<MyApp> {
               padding: EdgeInsets.only(bottom: 8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                    labelText: "Produit ID",
+                    labelText: "Student ID",
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0))),
+                            BorderSide(color: Colors.blue, width: 2.0))),
                 onChanged: (String id) {
-                  getidProd(id);
+                  getStudentID(id);
                 },
               ),
             ),
@@ -140,13 +138,13 @@ class _MyAppState extends State<MyApp> {
               padding: EdgeInsets.only(bottom: 8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                    labelText: "Cracter",
+                    labelText: "Study Program ID",
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0))),
-                onChanged: (String CractID) {
-                  getCracterstiqueProd(CractID);
+                            BorderSide(color: Colors.blue, width: 2.0))),
+                onChanged: (String programID) {
+                  getStudyProgramID(programID);
                 },
               ),
             ),
@@ -154,13 +152,13 @@ class _MyAppState extends State<MyApp> {
               padding: EdgeInsets.only(bottom: 8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                    labelText: "price",
+                    labelText: "GPA",
                     fillColor: Colors.white,
                     focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0))),
-                onChanged: (String price) {
-                  getProduitPrice(price);
+                            BorderSide(color: Colors.blue, width: 2.0))),
+                onChanged: (String gpa) {
+                  getStudentGPA(gpa);
                 },
               ),
             ),
@@ -178,7 +176,7 @@ class _MyAppState extends State<MyApp> {
                   },
                 ),
                 RaisedButton(
-                  color: Colors.orange,
+                  color: Colors.blue,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),
                   child: Text("Read"),
@@ -188,7 +186,7 @@ class _MyAppState extends State<MyApp> {
                   },
                 ),
                 RaisedButton(
-                  color: Colors.blueAccent,
+                  color: Colors.orange,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),
                   child: Text("Update"),
@@ -218,19 +216,19 @@ class _MyAppState extends State<MyApp> {
                     child: Text("Name"),
                   ),
                   Expanded(
-                    child: Text("Produit ID"),
+                    child: Text("Student ID"),
                   ),
                   Expanded(
-                    child: Text("Cracteristique"),
+                    child: Text("Program ID"),
                   ),
                   Expanded(
-                    child: Text("price"),
+                    child: Text("GPA"),
                   )
                 ],
               ),
             ),
             StreamBuilder(
-              stream: Firestore.instance.collection("Produits").snapshots(),
+              stream: Firestore.instance.collection("MyStudents").snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
@@ -242,18 +240,17 @@ class _MyAppState extends State<MyApp> {
                         return Row(
                           children: <Widget>[
                             Expanded(
-                              child: Text(documentSnapshot["nomProduit"]),
+                              child: Text(documentSnapshot["studentName"]),
                             ),
                             Expanded(
-                              child: Text(documentSnapshot["idProd"].toString()),
+                              child: Text(documentSnapshot["studentID"]),
                             ),
                             Expanded(
-                              child:
-                                  Text(documentSnapshot["CracterstiqueProd"]),
+                              child: Text(documentSnapshot["studyProgramID"]),
                             ),
                             Expanded(
                               child: Text(
-                                  documentSnapshot["ProduitPrice"].toString()),
+                                  documentSnapshot["studentGPA"].toString()),
                             )
                           ],
                         );

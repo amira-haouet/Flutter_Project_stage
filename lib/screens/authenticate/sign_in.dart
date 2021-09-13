@@ -26,11 +26,11 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Colors.yellow[100],
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.yellow[600],
         elevation: 0.0,
-        title: Text('Sign in to Brew Crew'),
+        title: Text('Sign in to GEEC'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),

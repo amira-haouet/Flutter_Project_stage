@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show BuildContext, MaterialApp, StatelessWidget, Widget, runApp;
 import 'package:lastapp2308/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'models/user.dart';
