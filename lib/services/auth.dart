@@ -3,7 +3,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lastapp2308/models/user.dart';
 import 'package:lastapp2308/services/database.dart';
-
 class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;

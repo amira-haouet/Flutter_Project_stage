@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lastapp2308/screens/home/acceuil.dart';
 import 'package:lastapp2308/screens/home/geec_list.dart';
 import 'package:lastapp2308/screens/menu/DashboardPage.dart';
 import 'package:lastapp2308/screens/menu/contact.dart';
@@ -10,40 +11,40 @@ import 'package:lastapp2308/services/database.dart';
 import 'package:lastapp2308/shared/myheader.dart';
 import 'package:provider/provider.dart';
 
-
-
 class Home extends StatefulWidget {
-    final AuthService _auth = AuthService();
+  final AuthService _auth = AuthService();
   @override
-  
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<Home> {
   final AuthService _auth = AuthService();
-  var currentPage = DrawerSections.dashboard;
+  var currentPage = DrawerSections.home;
 
   @override
   Widget build(BuildContext context) {
-    
     var container;
-    if (currentPage == DrawerSections.dashboard) {
-      container = Test();
-    }
-
-     else  {
-      container = EventsPage();
+    if (currentPage == DrawerSections.home) {
+      container = WelcomeScreen();
   
-    };
+    } else if(currentPage == DrawerSections.dashboard) {
+      container = Test();}
+      else if(currentPage == DrawerSections.contact)
+      {
+container = FormScreen();
+      }
+     else {
+      container = chart();
+    }
+    ;
 
-    
     return StreamProvider<QuerySnapshot>.value(
       value: DatabaseService().geecs,
-    child: Scaffold(
-       backgroundColor: Colors.yellow[50],
+      child: Scaffold(
+        backgroundColor: Colors.yellow[50],
         appBar: AppBar(
           title: Text('GEEC'),
-      backgroundColor: Colors.yellow[400],
+          backgroundColor: Colors.yellow[400],
           elevation: 0.0,
           actions: <Widget>[
             FlatButton.icon(
@@ -54,21 +55,21 @@ class _HomePageState extends State<Home> {
               },
             ),
           ],
-     
         ),
-      body: container,
-      drawer: Drawer(
-        child: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: [
-                MyHeaderDrawer(),
-                MyDrawerList(),
-              ],
+        body: container,
+        drawer: Drawer(
+          child: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                children: [
+                  MyHeaderDrawer(),
+                  MyDrawerList(),
+                ],
+              ),
             ),
           ),
         ),
-      ),),
+      ),
     );
   }
 
@@ -80,12 +81,14 @@ class _HomePageState extends State<Home> {
       child: Column(
         // shows the list of menu drawer
         children: [
-          menuItem(1, "Materials", Icons.dashboard_outlined,
+           menuItem(1, "Home", Icons.home_outlined,
+              currentPage == DrawerSections.home ? true : false),
+          menuItem(2, "Materials", Icons.dashboard_outlined,
               currentPage == DrawerSections.dashboard ? true : false),
-         
-          menuItem(3, "Events", Icons.event,
+              menuItem(3, "contact", Icons.contact_page_outlined,
+              currentPage == DrawerSections.contact ? true : false),
+          menuItem(4, "Analyse", Icons.bar_chart_outlined,
               currentPage == DrawerSections.events ? true : false),
-          
         ],
       ),
     );
@@ -99,11 +102,17 @@ class _HomePageState extends State<Home> {
           Navigator.pop(context);
           setState(() {
             if (id == 1) {
+                            currentPage = DrawerSections.home;
+
+            } else if (id == 2) {
               currentPage = DrawerSections.dashboard;
-            } 
-             else if (id == 3) {
+            }
+            else if (id == 3) {
+              currentPage = DrawerSections.contact;
+            }
+            else {
               currentPage = DrawerSections.events;
-            } 
+            }
           });
         },
         child: Padding(
@@ -136,8 +145,8 @@ class _HomePageState extends State<Home> {
 }
 
 enum DrawerSections {
+  home,
   dashboard,
-  contacts,
+  contact,
   events,
- 
 }
