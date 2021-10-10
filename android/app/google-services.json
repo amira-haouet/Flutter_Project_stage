@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "634410684168-5kq8mfiqmhvknsev9pas8scird637sa6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.geec.lastappl",
+            "certificate_hash": "ad679fe766dcacbbd4343710e15d3a35d6923164"
+          }
+        },
+        {
           "client_id": "634410684168-mi05i987p3p9r0orcb6ojlndnf763fne.apps.googleusercontent.com",
           "client_type": 3
         }
