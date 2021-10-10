@@ -1,153 +1,233 @@
 import 'package:flutter/material.dart';
 /*
-class ContactsPage extends StatelessWidget {
+
+*/
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:lastapp2308/shared/loading.dart';
+
+class Contact extends StatelessWidget {
   @override
+  bool loading = false;
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("Contacts Page"),
-      ),
-    );
-  }
-}*/
-class FormScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return FormScreenState();
+    return loading
+        ? Loading()
+        : Scaffold(
+            body: MyApp(),
+          );
   }
 }
 
-class FormScreenState extends State<FormScreen> {
-  String _name;
-  String _email;
-  
-  String _phoneNumber;
-  String _commentaire;
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _MyAppState extends State<MyApp> {
+  String commentaire, email;
+  String name;
+  int phonenumber;
 
-  Widget _buildName() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: 'Name'),
-      maxLength: 10,
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Nom est obligatoire !!';
-        }
-
-        return null;
-      },
-      onSaved: (String value) {
-        _name = value;
-      },
-    );
+  getcommentaire(name) {
+    this.commentaire = name;
   }
 
-  Widget _buildEmail() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: 'Email'),
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Email obilgatoire';
-        }
-
-        if (!RegExp(
-                r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-            .hasMatch(value)) {
-          return 'Entrer une adresse mail valide !!';
-        }
-
-        return null;
-      },
-      onSaved: (String value) {
-        _email = value;
-      },
-    );
+  getphonenumber(phone) {
+    this.phonenumber = int.parse(phone);
   }
 
-  
-
-
-
-  Widget _buildPhoneNumber() {
-    return TextFormField(
-      decoration: InputDecoration(labelText: 'Phone number'),
-      keyboardType: TextInputType.phone,
-      validator: (String value) {
-        if (value.isEmpty) {
-          return 'Phone number is Required';
-        }
-
-        return null;
-      },
-      onSaved: (String value) {
-        _phoneNumber = value;
-      },
-    );
+  getemail(CractID) {
+    this.email = CractID;
   }
 
-  Widget _buildCommentaire() {
-    return TextFormField(
-    decoration: InputDecoration(labelText: 'Commentaire'),
-     validator: (String value) {
-        if (value.isEmpty) {
-          return 'Comment is Required';
-        }
+  getname(price) {
+    this.name = price;
+  }
 
-        return null;
-      },
-      onSaved: (String value) {
-        _commentaire = value;
-      },
-    );
+  createData() {
+    DocumentReference documentReference =
+        Firestore.instance.collection("contact").document(commentaire);
+
+    // create Map
+    Map<String, dynamic> contact = {
+      "commentaire": commentaire,
+      "phonenumber": phonenumber,
+      "email": email,
+      "name": name
+    };
+
+    documentReference.setData(contact).whenComplete(() {
+      print("$commentaire created");
+    });
+  }
+
+  readData() {
+    DocumentReference documentReference =
+        Firestore.instance.collection("contact").document(commentaire);
+
+    documentReference.get().then((datasnapshot) {
+      print(datasnapshot.data["commentaire"]);
+      print(datasnapshot.data["phonenumber"]);
+      print(datasnapshot.data["email"]);
+      print(datasnapshot.data["name"]);
+    });
+  }
+
+  updateData() {
+    DocumentReference documentReference =
+        Firestore.instance.collection("contact").document(commentaire);
+
+    // create Map
+    Map<String, dynamic> contact = {
+      "commentaire": commentaire,
+      "phonenumber": phonenumber,
+      "email": email,
+      "name": name
+    };
+
+    documentReference.setData(contact).whenComplete(() {
+      print("$commentaire updated");
+    });
+  }
+
+  deleteData() {
+    DocumentReference documentReference =
+        Firestore.instance.collection("contact").document(commentaire);
+
+    documentReference.delete().whenComplete(() {
+      print("$commentaire deleted");
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Form Contact"),backgroundColor: Colors.orange,),
-      
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
+        resizeToAvoidBottomPadding: false,
+        appBar: AppBar(
+          backgroundColor: Colors.yellow[600],
+          title: Text("Materials"),
+        ),
+        body: SingleChildScrollView(
+          child: (Padding(
+            padding: EdgeInsets.all(16.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                _buildName(),
-                _buildEmail(),
-                
-                _buildPhoneNumber(),
-                _buildCommentaire(),
-                SizedBox(height: 100),
-                RaisedButton(
-                   color: Colors.green,
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: TextFormField(
+                    controller: n,
+                    decoration: InputDecoration(
+                        labelText: "Name",
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0))),
+                    onChanged: (String name) {
+                      getname(name);
+                    },
+                    validator: (String value) {
+                      if (value.isEmpty) {
+                        return 'Email obilgatoire';
+                      }
 
-                  child: Text(
-                    'Submit',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                      if (!RegExp(
+                              r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                          .hasMatch(value)) {
+                        return 'Entrer une adresse mail valide !!';
+                      }
+
+                      return null;
+                    },
                   ),
-                  onPressed: () {
-                    if (!_formKey.currentState.validate()) {
-                      return;
-                    }
-
-                    _formKey.currentState.save();
-
-                    print(_name);
-                    print(_email);
-                    print(_phoneNumber);
-                    print(_commentaire);
-
-                    //Send to API
-                  },
-                )
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: TextFormField(
+                    controller: p,
+                    decoration: InputDecoration(
+                        labelText: "Phone number",
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0))),
+                    onChanged: (String id) {
+                      getphonenumber(id);
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: TextFormField(
+                    controller: e,
+                    decoration: InputDecoration(
+                        labelText: "email",
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0))),
+                    onChanged: (String CractID) {
+                      getemail(CractID);
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: TextFormField(
+                    controller: e,
+                    decoration: InputDecoration(
+                        labelText: "coment",
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0))),
+                    onChanged: (String price) {
+                      getcommentaire(price);
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20.0),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    RaisedButton(
+                      onPressed: clearTextInput,
+                      color: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      textColor: Colors.white,
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      child: Text('Clear'),
+                    ),
+                    RaisedButton(
+                      color: Colors.green,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Text("Create"),
+                      textColor: Colors.white,
+                      onPressed: () {
+                        createData();
+                      },
+                    ),
+                  ],
+                ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
+          )),
+        ));
   }
+}
+
+final c = TextEditingController();
+final n = TextEditingController();
+final p = TextEditingController();
+final e = TextEditingController();
+clearTextInput() {
+  c.clear();
+  n.clear();
+  p.clear();
+  e.clear();
 }

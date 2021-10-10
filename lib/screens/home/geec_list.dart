@@ -68,7 +68,6 @@ class _MyAppState extends State<MyApp> {
       print(datasnapshot.data["CracterstiqueProd"]);
       print(datasnapshot.data["ProduitPrice"]);
     });
-    
   }
 
   updateData() {
@@ -100,175 +99,178 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.yellow[600],
-        title: Text("Materials"),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    labelText: "Name",
-                    fillColor: Colors.white,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0))),
-                onChanged: (String name) {
-                  getnomProduit(name);
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    labelText: "Produit ID",
-                    fillColor: Colors.white,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0))),
-                onChanged: (String id) {
-                  getidProd(id);
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    labelText: "Cracter",
-                    fillColor: Colors.white,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0))),
-                onChanged: (String CractID) {
-                  getCracterstiqueProd(CractID);
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    labelText: "price",
-                    fillColor: Colors.white,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0))),
-                onChanged: (String price) {
-                  getProduitPrice(price);
-                },
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        resizeToAvoidBottomPadding: false,
+        appBar: AppBar(
+          backgroundColor: Colors.yellow[600],
+          title: Text("Materials"),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
               children: <Widget>[
-                RaisedButton(
-                  color: Colors.green,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Text("Create"),
-                  textColor: Colors.white,
-                  onPressed: () {
-                    createData();
-                  },
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: "Name",
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0))),
+                    onChanged: (String name) {
+                      getnomProduit(name);
+                    },
+                  ),
                 ),
-                RaisedButton(
-                  color: Colors.orange,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Text("Read"),
-                  textColor: Colors.white,
-                  onPressed: () {
-                    readData();
-                  },
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: "Produit ID",
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0))),
+                    onChanged: (String id) {
+                      getidProd(id);
+                    },
+                  ),
                 ),
-                RaisedButton(
-                  color: Colors.blueAccent,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Text("Update"),
-                  textColor: Colors.white,
-                  onPressed: () {
-                    updateData();
-                  },
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: "Cracter",
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0))),
+                    onChanged: (String CractID) {
+                      getCracterstiqueProd(CractID);
+                    },
+                  ),
                 ),
-                RaisedButton(
-                  color: Colors.red,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Text("Delete"),
-                  textColor: Colors.white,
-                  onPressed: () {
-                    deleteData();
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: "price",
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.orange, width: 2.0))),
+                    onChanged: (String price) {
+                      getProduitPrice(price);
+                    },
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    RaisedButton(
+                      color: Colors.green,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Text("Create"),
+                      textColor: Colors.white,
+                      onPressed: () {
+                        createData();
+                      },
+                    ),
+                    RaisedButton(
+                      color: Colors.orange,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Text("Read"),
+                      textColor: Colors.white,
+                      onPressed: () {
+                        readData();
+                      },
+                    ),
+                    RaisedButton(
+                      color: Colors.blueAccent,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Text("Update"),
+                      textColor: Colors.white,
+                      onPressed: () {
+                        updateData();
+                      },
+                    ),
+                    RaisedButton(
+                      color: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Text("Delete"),
+                      textColor: Colors.white,
+                      onPressed: () {
+                        deleteData();
+                      },
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    textDirection: TextDirection.ltr,
+                    children: <Widget>[
+                      Expanded(
+                        child: Text("Name"),
+                      ),
+                      Expanded(
+                        child: Text("Produit ID"),
+                      ),
+                      Expanded(
+                        child: Text("Cracteristique"),
+                      ),
+                      Expanded(
+                        child: Text("price"),
+                      )
+                    ],
+                  ),
+                ),
+                StreamBuilder(
+                  stream: Firestore.instance.collection("Produits").snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: snapshot.data.documents.length,
+                          itemBuilder: (context, index) {
+                            DocumentSnapshot documentSnapshot =
+                                snapshot.data.documents[index];
+                            return Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Text(documentSnapshot["nomProduit"]),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      documentSnapshot["idProd"].toString()),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      documentSnapshot["CracterstiqueProd"]),
+                                ),
+                                Expanded(
+                                  child: Text(documentSnapshot["ProduitPrice"]
+                                      .toString()),
+                                )
+                              ],
+                            );
+                          });
+                    } else {
+                      return Align(
+                        alignment: FractionalOffset.bottomCenter,
+                        child: CircularProgressIndicator(),
+                      );
+                    }
                   },
                 )
               ],
             ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                textDirection: TextDirection.ltr,
-                children: <Widget>[
-                  Expanded(
-                    child: Text("Name"),
-                  ),
-                  Expanded(
-                    child: Text("Produit ID"),
-                  ),
-                  Expanded(
-                    child: Text("Cracteristique"),
-                  ),
-                  Expanded(
-                    child: Text("price"),
-                  )
-                ],
-              ),
-            ),
-            StreamBuilder(
-              stream: Firestore.instance.collection("Produits").snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: snapshot.data.documents.length,
-                      itemBuilder: (context, index) {
-                        DocumentSnapshot documentSnapshot =
-                            snapshot.data.documents[index];
-                        return Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(documentSnapshot["nomProduit"]),
-                            ),
-                            Expanded(
-                              child: Text(documentSnapshot["idProd"].toString()),
-                            ),
-                            Expanded(
-                              child:
-                                  Text(documentSnapshot["CracterstiqueProd"]),
-                            ),
-                            Expanded(
-                              child: Text(
-                                  documentSnapshot["ProduitPrice"].toString()),
-                            )
-                          ],
-                        );
-                      });
-                } else {
-                  return Align(
-                    alignment: FractionalOffset.bottomCenter,
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            )
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }

@@ -28,6 +28,27 @@ dependencies:
   cloud_firestore: ^0.12.9+4
   provider: ^3.1.0
   flutter_spinkit: ^4.0.0
+  webview_flutter: ^0.3.22 
+  charts_flutter: ^0.6.0
+  font_awesome_flutter: ^8.6.0
+  video_player: ^1.0.1
+  google_sign_in: ^4.1.1
+  shared_preferences: ^0.5.7+2
+#In the Flutter, we can use the shared preferences library to save the current selected theme 
+  intl: ^0.15.5
+  randomizer: ^0.0.2
+  image_picker: ^0.6.7+17
+  timeago: ^2.0.17
+  carousel_slider: ^2.0.0
+  carousel_indicator: ^1.0.1
+  hive: ^1.4.1+1
+  
+  path_provider: ^1.6.5
+
+
+
+
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2

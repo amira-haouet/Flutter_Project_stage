@@ -71,7 +71,10 @@ FirebaseUser currentUser;
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage('assets/images.png'),
+                //Width:10,
+                image: AssetImage('assets/images.png',
+                //width:10,
+                ),
               ),
             ),
           ),

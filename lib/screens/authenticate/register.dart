@@ -31,11 +31,11 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
         backgroundColor: Colors.yellow[400],
         elevation: 0.0,
-        title: Text('Sign up to Brew Crew'),
+        title: Text('Register to GEEC'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),
-            label: Text('Sign In'),
+            label: Text('Login'),
             onPressed: () => widget.toggleView(),
           ),
         ],
@@ -65,7 +65,7 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               RaisedButton(
-                color: Colors.pink[400],
+                color: Colors.green[400],
                 child: Text(
                   'Register',
                   style: TextStyle(color: Colors.white),

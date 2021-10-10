@@ -1,274 +1,119 @@
-  
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-class chart extends StatefulWidget {
-  final Widget child;
+import 'package:lastapp2308/screens/menu/bar.dart';
 
-  chart({Key key, this.child}) : super(key: key);
-
-  _HomePageState createState() => _HomePageState();
+class TaskHomePage extends StatefulWidget {
+  @override
+  _TaskHomePageState createState() {
+    return _TaskHomePageState();
+  }
 }
 
-class _HomePageState extends State<chart> {
-  List<charts.Series<Pollution, String>> _seriesData;
+class _TaskHomePageState extends State<TaskHomePage> {
   List<charts.Series<Task, String>> _seriesPieData;
-  List<charts.Series<Sales, int>> _seriesLineData;
-
-  _generateData() {
-    var data1 = [
-      new Pollution(1980, 'USA', 30),
-      new Pollution(1980, 'Asia', 40),
-      new Pollution(1980, 'Europe', 10),
-    ];
-    var data2 = [
-      new Pollution(1985, 'USA', 100),
-      new Pollution(1980, 'Asia', 150),
-      new Pollution(1985, 'Europe', 80),
-    ];
-    var data3 = [
-      new Pollution(1985, 'USA', 200),
-      new Pollution(1980, 'Asia', 300),
-      new Pollution(1985, 'Europe', 180),
-    ];
-
-    var piedata = [
-      new Task('Cuisine', 35.8, Color(0xff3366cc)),
-      new Task('Refregirateur', 8.3, Color(0xff990099)),
-      new Task('standby', 10.8, Color(0xff109618)),
-      new Task('Eclairage', 15.6, Color(0xfffdbe19)),
-      
-    ];
-
-    var linesalesdata = [
-      new Sales(0, 45),
-      new Sales(1, 56),
-      new Sales(2, 55),
-      new Sales(3, 60),
-      new Sales(4, 61),
-      new Sales(5, 70),
-    ];
-    var linesalesdata1 = [
-      new Sales(0, 35),
-      new Sales(1, 46),
-      new Sales(2, 45),
-      new Sales(3, 50),
-      new Sales(4, 51),
-      new Sales(5, 60),
-    ];
-
-    var linesalesdata2 = [
-      new Sales(0, 20),
-      new Sales(1, 24),
-      new Sales(2, 25),
-      new Sales(3, 40),
-      new Sales(4, 45),
-      new Sales(5, 60),
-    ];
-
-    _seriesData.add(
-      charts.Series(
-        domainFn: (Pollution pollution, _) => pollution.place,
-        measureFn: (Pollution pollution, _) => pollution.quantity,
-        id: '2017',
-        data: data1,
-        fillPatternFn: (_, __) => charts.FillPatternType.solid,
-        fillColorFn: (Pollution pollution, _) =>
-            charts.ColorUtil.fromDartColor(Color(0xff990099)),
-      ), 
-    );
-
-    _seriesData.add(
-      charts.Series(
-        domainFn: (Pollution pollution, _) => pollution.place,
-        measureFn: (Pollution pollution, _) => pollution.quantity,
-        id: '2018',
-        data: data2,
-        fillPatternFn: (_, __) => charts.FillPatternType.solid,
-        fillColorFn: (Pollution pollution, _) =>
-           charts.ColorUtil.fromDartColor(Color(0xff109618)),
-      ),
-    );
-
-    _seriesData.add(
-      charts.Series(
-        domainFn: (Pollution pollution, _) => pollution.place,
-        measureFn: (Pollution pollution, _) => pollution.quantity,
-        id: '2019',
-        data: data3,
-        fillPatternFn: (_, __) => charts.FillPatternType.solid,
-       fillColorFn: (Pollution pollution, _) =>
-          charts.ColorUtil.fromDartColor(Color(0xffff9900)),
-      ),
-    );
-
+  List<Task> mydata;
+  _generateData(mydata) {
+    _seriesPieData = List<charts.Series<Task, String>>();
     _seriesPieData.add(
       charts.Series(
-        domainFn: (Task task, _) => task.task,
-        measureFn: (Task task, _) => task.taskvalue,
+        domainFn: (Task task, _) => task.taskDetails,
+        measureFn: (Task task, _) => task.taskVal,
         colorFn: (Task task, _) =>
-            charts.ColorUtil.fromDartColor(task.colorval),
-        id: 'Air Pollution',
-        data: piedata,
-         labelAccessorFn: (Task row, _) => '${row.taskvalue}',
-      ),
-    );
-
-    _seriesLineData.add(
-      charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff990099)),
-        id: 'Air Pollution',
-        data: linesalesdata,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
-      ),
-    );
-    _seriesLineData.add(
-      charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff109618)),
-        id: 'Air Pollution',
-        data: linesalesdata1,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
-      ),
-    );
-    _seriesLineData.add(
-      charts.Series(
-        colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffff9900)),
-        id: 'Air Pollution',
-        data: linesalesdata2,
-        domainFn: (Sales sales, _) => sales.yearval,
-        measureFn: (Sales sales, _) => sales.salesval,
+            charts.ColorUtil.fromDartColor(Color(int.parse(task.colorVal))),
+        id: 'tasks',
+        data: mydata,
+        labelAccessorFn: (Task row, _) => "${row.taskVal}",
       ),
     );
   }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _seriesData = List<charts.Series<Pollution, String>>();
-    _seriesPieData = List<charts.Series<Task, String>>();
-    _seriesLineData = List<charts.Series<Sales, int>>();
-    _generateData();
-  }
-
+ 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.yellow[800],
-            //backgroundColor: Color(0xff308e1c),
-            bottom: TabBar(
-              indicatorColor: Color(0xff9962D0),
-              tabs: [
-                Tab(
-                  icon: Icon(FontAwesomeIcons.solidChartBar),
-                ),
-                Tab(icon: Icon(FontAwesomeIcons.chartPie)),
-                Tab(icon: Icon(FontAwesomeIcons.chartLine)),
-              ],
+        debugShowCheckedModeBanner: false,
+        home: DefaultTabController(
+          length: 2,
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.yellow[800],
+              //backgroundColor: Color(0xff308e1c),
+              bottom: TabBar(
+                indicatorColor: Color(0xff9962D0),
+                tabs: [
+                  Tab(icon: Icon(FontAwesomeIcons.chartPie)),
+                  Tab(icon: Icon(FontAwesomeIcons.chartLine)),
+                ],
+              ),
             ),
-            title: Text('Analyseur d''energie N°:'),
+            body: TabBarView(
+                children: [
+                _buildBody(context),
+               SalesHomePage().createState().build(context)
+               ],
+              
           ),
-          body: TabBarView(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Container(
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                            'SO₂ emissions, by world region (in million tonnes)',style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
-                        Expanded(
-                          child: charts.BarChart(
-                            _seriesData,
-                            animate: true,
-                            barGroupingType: charts.BarGroupingType.grouped,
-                            //behaviors: [new charts.SeriesLegend()],
-                            animationDuration: Duration(seconds: 5),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+        )
+        ));
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('task').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return LinearProgressIndicator();
+        } else {
+          List<Task> task = snapshot.data.documents
+              .map((documentSnapshot) => Task.fromMap(documentSnapshot.data))
+              .toList();
+          return _buildChart(context, task);
+        }
+      },
+    );
+  }
+
+  Widget _buildChart(BuildContext context, List<Task> taskdata) {
+    mydata = taskdata;
+    _generateData(mydata);
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Container(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Text(
+                'Energy spent on daily tasks',
+                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Container(
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                            'Consommation de la Maison par Categorie'
-                            ,style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
-                            SizedBox(height: 10.0,),
-                        Expanded(
-                          child: charts.PieChart(
-                            _seriesPieData,
-                            animate: true,
-                            animationDuration: Duration(seconds: 5),
-                             behaviors: [
-                            new charts.DatumLegend(
-                              outsideJustification: charts.OutsideJustification.endDrawArea,
-                              horizontalFirst: false,
-                              desiredMaxRows: 2,
-                              cellPadding: new EdgeInsets.only(right: 4.0, bottom: 4.0),
-                              entryTextStyle: charts.TextStyleSpec(
-                                  color: charts.MaterialPalette.purple.shadeDefault,
-                                  fontFamily: 'Georgia',
-                                  fontSize: 11),
-                            )
-                          ],
-                           defaultRenderer: new charts.ArcRendererConfig(
-                              arcWidth: 100,
-                             arcRendererDecorators: [
-          new charts.ArcLabelDecorator(
-              labelPosition: charts.ArcLabelPosition.inside)
-        ])),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              SizedBox(
+                height: 10.0,
               ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Container(
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                            'Historique Consomation Instantanée en Watts',
-                            style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold),),
-                        Expanded(
-                          child: charts.LineChart(
-                            _seriesLineData,
-                            defaultRenderer: new charts.LineRendererConfig(
-                                includeArea: true, stacked: true),
-                            animate: true,
-                            animationDuration: Duration(seconds: 5),
-                            behaviors: [
-        new charts.ChartTitle('Semaine',
-            behaviorPosition: charts.BehaviorPosition.bottom,
-            titleOutsideJustification:charts.OutsideJustification.middleDrawArea),
-        new charts.ChartTitle('Watts',
-            behaviorPosition: charts.BehaviorPosition.start,
-            titleOutsideJustification: charts.OutsideJustification.middleDrawArea),
-       
-      ]
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              Expanded(
+                child: charts.PieChart(_seriesPieData,
+                    animate: true,
+                    animationDuration: Duration(seconds: 5),
+                    behaviors: [
+                      new charts.DatumLegend(
+                        outsideJustification:
+                            charts.OutsideJustification.endDrawArea,
+                        horizontalFirst: false,
+                        desiredMaxRows: 2,
+                        cellPadding: new EdgeInsets.only(
+                            right: 4.0, bottom: 4.0, top: 4.0),
+                        entryTextStyle: charts.TextStyleSpec(
+                            color: charts.MaterialPalette.purple.shadeDefault,
+                            fontFamily: 'Georgia',
+                            fontSize: 18),
+                      )
+                    ],
+                    defaultRenderer: new charts.ArcRendererConfig(
+                        arcWidth: 100,
+                        arcRendererDecorators: [
+                          new charts.ArcLabelDecorator(
+                              labelPosition: charts.ArcLabelPosition.inside)
+                        ])),
               ),
             ],
           ),
@@ -276,27 +121,25 @@ class _HomePageState extends State<chart> {
       ),
     );
   }
-}
 
-class Pollution {
-  String place;
-  int year;
-  int quantity;
-
-  Pollution(this.year, this.place, this.quantity);
+  
+  
 }
 
 class Task {
-  String task;
-  double taskvalue;
-  Color colorval;
+  final int taskVal;
+  final String taskDetails;
+  final String colorVal;
+  Task(this.taskDetails, this.taskVal, this.colorVal);
 
-  Task(this.task, this.taskvalue, this.colorval);
-}
+  Task.fromMap(Map<String, dynamic> map)
+      : assert(map['taskDetails'] != null),
+        assert(map['taskVal'] != null),
+        assert(map['colorVal'] != null),
+        taskDetails = map['taskDetails'],
+        taskVal = map['taskVal'],
+        colorVal = map['colorVal'];
 
-class Sales {
-  int yearval;
-  int salesval;
-
-  Sales(this.yearval, this.salesval);
+  @override
+  String toString() => "Record<$taskVal:$taskDetails>";
 }

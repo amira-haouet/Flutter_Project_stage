@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_indicator/carousel_indicator.dart';
+
 class WelcomeScreen extends StatelessWidget {
 // This widget is the root
 // of your application
@@ -23,93 +25,113 @@ class WelcomeScreen extends StatelessWidget {
         
 */
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor:Colors.orange,
-        title: new Text(
-          'welcome to GEEC',
-          style: new TextStyle(
-            color: Colors.blueGrey[600],
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0,
+      
+        appBar: AppBar(
+          backgroundColor: Colors.orange,
+          title: new Text(
+            
+            'welcome to GEECVoltware',
+            style: new TextStyle(
+              color: Colors.blueGrey[600],
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+            ),
           ),
+        
         ),
-      ),
- body: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-             Text(' Take control of your energy usage',
+        
+        body: SingleChildScrollView(
           
-          style: TextStyle(fontWeight: FontWeight.bold,color : Colors.green,fontSize: 20.0),
-
-          ),
-          Text('Voltaware uses AI to track your energy use down to the appliance level. This enables you to get on top of your electricity bill, reduce your carbon footprint, make your home safer, monitor elderly relatives, and much more…',  
-          style: TextStyle(fontWeight: FontWeight.bold,color : Colors.grey[800],fontSize: 15.0),
-          textAlign: TextAlign.justify,
-
-          ),
-              Container(height: 10), // set height
-
-             Container(       child: Table(
-                       border: TableBorder.all(  
-                        color: Colors.black,  
-                        style: BorderStyle.solid, 
- 
-                        width: 2),   
-                         
-children: [   TableRow( 
-  children: [ 
-    Column( crossAxisAlignment: CrossAxisAlignment.center,
-   children:[
-     
-  CarouselSlider.builder(
-            itemCount: imageList.length,
-            itemBuilder: (BuildContext context, int itemIndex) => Container(
-                    alignment: Alignment.topCenter,// use aligment
-              child: new Image.asset(
-                
-                imageList[itemIndex],
-              fit: BoxFit.cover,
-              // width: 400,
-               height :180,
+          child: Column(
+            
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //  crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              
+              Text(
+                ' Take control of your energy usage',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                    fontSize: 20.0),
               ),
-            ),
-            options: CarouselOptions(
-              autoPlay: true,
-    enlargeCenterPage: true,
-      autoPlayInterval: Duration(seconds: 3),
+              Text(
+                'Voltaware uses AI to track your energy use down to the appliance level. This enables you to get on top of your electricity bill, reduce your carbon footprint, make your home safer, monitor elderly relatives, and much more…',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800],
+                    fontSize: 15.0),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              CarouselSlider.builder(
+                itemCount: imageList.length,
+                itemBuilder: (BuildContext context, int itemIndex) => Container(
+                  alignment: Alignment.topCenter, // use aligment
+                  child: Image.asset(
+                    imageList[itemIndex],
+                    fit: BoxFit.fill,
+                    width: 400,
+                    //height :100,
+                  ),
+                ),
+                options: CarouselOptions(
+                  autoPlay: true,
+                  enlargeCenterPage: true,
+                  autoPlayInterval: Duration(seconds: 3),
 
-              viewportFraction: 0.9,
-              aspectRatio: 1.0,
-              initialPage: 0,
-            ),
-          ),
-
-Text('tatatat'),
-
-          ]
-       )     ,]),
-/*TableRow( children: [
-   Column( children:[  Text('Voltaware sensorshylizijvmoitjozzhbtqzobhzorjojmztjoemiirjt',
-          
-          style: TextStyle(fontWeight: FontWeight.bold,color : Colors.green,fontSize: 22.0,       
-                      
-
-          ),
-
-            ),
-            ])]),
-*/
- ]),),
-            ],),));
-  }
-}
-        /*  Expanded(
-            child: 
+                  viewportFraction: 0.9,
+                  //  aspectRatio: 1.0,
+                  initialPage: 0,
+                ),
+              ),
+              Container(
+                child: Table(children: [
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Voltaware sensors  ',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                            fontSize: 22.0,
+                          )),
+                      Text(
+                          'Voltaware remotely tracks your home activity through real-time safety & security to prevent crime, unpleasant surprises and avoid potential fire hazards.',
+                          textAlign: TextAlign.left)
+                    ]),
+                    Column(children: [
+                      new Image.asset(
+                        'assets/volt.jpg',
+                        width: 120.0,
+                        height: 100.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ]),
+                  ]),
+                  TableRow(children: [
+                    Column(children: [
+                      new Image.asset(
+                        'assets/b.png',
+                        width: 120.0,
+                        height: 50.0,
+                        fit: BoxFit.cover,
+                      ),
+                    ]),
+                    Column(
+                      children: [
+                        Text('Understand your energy use',
+                            style: TextStyle(color: Colors.green)),
+                        Text(
+                            'Voltaware uses AI to deliver energy insights down to the appliance level so that you can streamline your energy usage.',
+                            textAlign: TextAlign.left),
+                      ],
+                    ),
+                  ]),
+                ]),
+              ),
             ],
-          ),*/
-      /*new ListView(
+          ),
+          /*new ListView(
         children: [
           Image.asset(
             'assets/images.png',
@@ -193,7 +215,9 @@ Text('tatatat'),
           ),
         ],
       ),*/
-    
+        ));
+  }
+}
 
 /*
 class WelcomeScreen extends StatelessWidget {
@@ -210,9 +234,10 @@ class WelcomeScreen extends StatelessWidget {
 }
 */
 //
-final List<String> imageList  = [
+final List<String> imageList = [
   "assets/geec1.jpg",
-  "assets/geec2.jpg",
   "assets/geec.jpg",
-  
+  "assets/geec3.jpg",
+  "assets/sensor.png",
+  "assets/oo.jpg",
 ];

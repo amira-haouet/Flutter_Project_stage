@@ -31,10 +31,10 @@ class _HomePageState extends State<Home> {
       container = Test();}
       else if(currentPage == DrawerSections.contact)
       {
-container = FormScreen();
+container = Contact();
       }
      else {
-      container = chart();
+      container = TaskHomePage();
     }
     ;
 
