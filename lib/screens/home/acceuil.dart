@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:carousel_indicator/carousel_indicator.dart';
 
 class WelcomeScreen extends StatelessWidget {
 // This widget is the root
@@ -25,11 +24,9 @@ class WelcomeScreen extends StatelessWidget {
         
 */
     return Scaffold(
-      
         appBar: AppBar(
           backgroundColor: Colors.orange,
           title: new Text(
-            
             'welcome to GEECVoltware',
             style: new TextStyle(
               color: Colors.blueGrey[600],
@@ -37,17 +34,12 @@ class WelcomeScreen extends StatelessWidget {
               fontSize: 20.0,
             ),
           ),
-        
         ),
-        
         body: SingleChildScrollView(
-          
           child: Column(
-            
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             //  crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              
               Text(
                 ' Take control of your energy usage',
                 style: TextStyle(

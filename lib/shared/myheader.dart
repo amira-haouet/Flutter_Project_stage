@@ -47,7 +47,6 @@ FirebaseUser currentUser;
 
   String getemail() {
     if (getCurrentUser() != null) {
-      
       //return getCurrentUser().toString();
       return 'there is user';
     } else {
@@ -72,8 +71,9 @@ FirebaseUser currentUser;
               shape: BoxShape.circle,
               image: DecorationImage(
                 //Width:10,
-                image: AssetImage('assets/images.png',
-                //width:10,
+                image: AssetImage(
+                  'assets/images.png',
+                  //width:10,
                 ),
               ),
             ),

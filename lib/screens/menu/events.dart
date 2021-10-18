@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lastapp2308/screens/menu/bar.dart';
+
+import 'bar.dart';
 
 class TaskHomePage extends StatefulWidget {
   @override
@@ -28,8 +29,9 @@ class _TaskHomePageState extends State<TaskHomePage> {
       ),
     );
   }
- 
-  @override
+
+  
+ @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -73,7 +75,6 @@ class _TaskHomePageState extends State<TaskHomePage> {
       },
     );
   }
-
   Widget _buildChart(BuildContext context, List<Task> taskdata) {
     mydata = taskdata;
     _generateData(mydata);
@@ -84,7 +85,7 @@ class _TaskHomePageState extends State<TaskHomePage> {
           child: Column(
             children: <Widget>[
               Text(
-                'Energy spent on daily tasks',
+                'Time spent on daily tasks',
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(
@@ -100,8 +101,8 @@ class _TaskHomePageState extends State<TaskHomePage> {
                             charts.OutsideJustification.endDrawArea,
                         horizontalFirst: false,
                         desiredMaxRows: 2,
-                        cellPadding: new EdgeInsets.only(
-                            right: 4.0, bottom: 4.0, top: 4.0),
+                        cellPadding:
+                            new EdgeInsets.only(right: 4.0, bottom: 4.0,top:4.0),
                         entryTextStyle: charts.TextStyleSpec(
                             color: charts.MaterialPalette.purple.shadeDefault,
                             fontFamily: 'Georgia',
@@ -121,11 +122,7 @@ class _TaskHomePageState extends State<TaskHomePage> {
       ),
     );
   }
-
-  
-  
 }
-
 class Task {
   final int taskVal;
   final String taskDetails;
@@ -143,3 +140,10 @@ class Task {
   @override
   String toString() => "Record<$taskVal:$taskDetails>";
 }
+
+
+
+
+
+
+

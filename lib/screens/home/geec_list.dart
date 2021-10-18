@@ -127,7 +127,7 @@ class _MyAppState extends State<MyApp> {
                   padding: EdgeInsets.only(bottom: 8.0),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        labelText: "Produit ID",
+                        labelText: "Appareil ID",
                         fillColor: Colors.white,
                         focusedBorder: OutlineInputBorder(
                             borderSide:
@@ -141,7 +141,7 @@ class _MyAppState extends State<MyApp> {
                   padding: EdgeInsets.only(bottom: 8.0),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        labelText: "Cracter",
+                        labelText: "Cracteristique",
                         fillColor: Colors.white,
                         focusedBorder: OutlineInputBorder(
                             borderSide:
@@ -155,7 +155,7 @@ class _MyAppState extends State<MyApp> {
                   padding: EdgeInsets.only(bottom: 8.0),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        labelText: "price",
+                        labelText: "Reference",
                         fillColor: Colors.white,
                         focusedBorder: OutlineInputBorder(
                             borderSide:
@@ -198,7 +198,8 @@ class _MyAppState extends State<MyApp> {
                         updateData();
                       },
                     ),
-                    RaisedButton(
+                    Expanded(
+                        child: RaisedButton(
                       color: Colors.red,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16)),
@@ -207,7 +208,7 @@ class _MyAppState extends State<MyApp> {
                       onPressed: () {
                         deleteData();
                       },
-                    )
+                    ))
                   ],
                 ),
                 Padding(
@@ -216,16 +217,16 @@ class _MyAppState extends State<MyApp> {
                     textDirection: TextDirection.ltr,
                     children: <Widget>[
                       Expanded(
-                        child: Text("Name"),
+                        child: Text("Label "),
                       ),
                       Expanded(
-                        child: Text("Produit ID"),
+                        child: Text("Material ID"),
                       ),
                       Expanded(
                         child: Text("Cracteristique"),
                       ),
                       Expanded(
-                        child: Text("price"),
+                        child: Text("Reference"),
                       )
                     ],
                   ),
@@ -254,7 +255,7 @@ class _MyAppState extends State<MyApp> {
                                       documentSnapshot["CracterstiqueProd"]),
                                 ),
                                 Expanded(
-                                  child: Text(documentSnapshot["ProduitPrice"]
+                                  child: Text(documentSnapshot["ProduitREF"]
                                       .toString()),
                                 )
                               ],

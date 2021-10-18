@@ -107,7 +107,7 @@ class _MyAppState extends State<MyApp> {
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           backgroundColor: Colors.yellow[600],
-          title: Text("Materials"),
+          title: Text("Contact Form"),
         ),
         body: SingleChildScrollView(
           child: (Padding(

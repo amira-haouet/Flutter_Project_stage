@@ -19,7 +19,7 @@ class DatabaseService {
   }
 
   // get brews stream
- Stream<QuerySnapshot> get geecs{
+  Stream<QuerySnapshot> get geecs {
     return geecCollection.snapshots();
   }
 }
