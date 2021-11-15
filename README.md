@@ -1,7 +1,14 @@
-# lastapp2308
+# Flutter App
+Application mobile Flutter ( CRUD + Authentification + Charts)
+## technlogie utilisé 
+<div>
+<img src="https://img.icons8.com/fluency/50/000000/flutter.png"/>
 
-A new Flutter project.
-
+<img src="https://img.icons8.com/color/48/000000/dart.png"/>
+  </div>
+  
+  
+  
 ## Getting Started
 
 This project is a starting point for a Flutter application.
